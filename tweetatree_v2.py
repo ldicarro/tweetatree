@@ -32,7 +32,7 @@ def update():
 		if oldid != newid:
 			for i in range(len(copy)):
 				if copy[i] == 'deck':
-					song = 'deckthehalls'
+					song = 'sample/ovenrake_deck-the-halls.mp3'
 				elif copy[i] == 'frosty':
 					song = 'frosty'
 				elif copy[i] == 'jingle':
@@ -43,11 +43,22 @@ def update():
 					song = 'letitsnow'
 				elif copy[i] == 'winter':
 					song = 'winterwland'
+				elif copy[i] == 'doctor':
+					song = '01-doctor-who-title-theme.mp3'
+				elif copy[i] == 'mario':
+					song = '01-super-mario-bros.mp3'
+				elif copy[i] == 'star':
+					song = '02-invincibility-star.mp3'
+				elif copy[i] == 'jedi':
+					song = 'super-star-wars-return-of-the-jedi-hopelessness.mp3'
+
 
 			if song != '':
 				logging.info('song to be played: ' + song)
 				try:
-					subprocess.call(['aplaymidi','--port','14','/home/pi/mid/' + song + '.mid'])
+					subprocess.call(['python','py/synchronized_lights.py','--file=/home/pi/lightshowpi/music/' + song])
+					# subprocess.call(['aplaymidi','--port','14','/home/pi/mid/' + song + '.mid'])
+					# sudo python py/synchronized_lights.py --file=/home/pi/lightshowpi/music/super-star-wars-return-of-the-jedi-hopelessness.mp3
 				except:
 					logging.warning('problem with playing song: %s', sys.exc_info()[1])
 			oldid = newid
